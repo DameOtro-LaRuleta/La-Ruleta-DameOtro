@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>LA RULETA – DameOtro</title>
+
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="Descubre los 8 sabores exclusivos de DameOtro con La Ruleta interactiva. Hechos para repetir.">
+  <meta property="og:title" content="LA RULETA – DameOtro">
+  <meta property="og:description" content="¿Listo para descubrir cuál será tu próximo bocado?">
+  <meta property="og:type" content="website">
+
+  <!-- Fuentes Tipográficas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Confetti JS para la celebración -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
+</head>
+<body>
+
+  <!-- Contenedor Principal App -->
+  <div class="app-wrapper">
+
+    <!-- Header / Branding -->
+    <header class="app-header">
+      <div class="logo-container">
+        <h1 class="logo-text">DameOtro<span class="bite-mark"></span></h1>
+        <div class="gold-line"></div>
+        <p class="tagline">Hechos para repetir</p>
+      </div>
+    </header>
+
+    <!-- PANTALLA 1: Bienvenida -->
+    <section id="welcomeScreen" class="screen active">
+      <div class="welcome-card">
+        <div class="dice-icon">🎲</div>
+        <h2 class="main-title">LA RULETA</h2>
+        <p class="subtitle-badge">8 SABORES PARA REPETIR</p>
+        <p class="welcome-desc">¿Listo para descubrir cuál será tu primer bocado?</p>
+        <button id="startBtn" class="btn-primary">GIRAR</button>
+      </div>
+    </section>
+
+    <!-- PANTALLA 2: Juego / Ruleta -->
+    <section id="gameScreen" class="screen">
+      <div class="wheel-container">
+        <!-- Indicador/Flecha Fija (Apuntando hacia abajo) -->
+        <div class="wheel-pointer">
+          <div class="pointer-arrow"></div>
+        </div>
+
+        <!-- Ruleta Rota -->
+        <div class="wheel-frame">
+          <canvas id="wheelCanvas" width="500" height="500"></canvas>
+          <button id="centerSpinBtn" class="gold-center-btn">
+            <span>GIRAR</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Barra de Progreso / Colección de Giros -->
+      <div class="collection-tracker">
+        <h3 class="tracker-title">Colección de Sabores</h3>
+        <div class="tracker-dots" id="trackerDots">
+          <div class="dot" data-step="1"><span>1</span></div>
+          <div class="dot" data-step="2"><span>2</span></div>
+          <div class="dot" data-step="3"><span>3</span></div>
+          <div class="dot" data-step="4"><span>4</span></div>
+          <div class="dot" data-step="5"><span>5</span></div>
+          <div class="dot" data-step="6"><span>6</span></div>
+          <div class="dot" data-step="7"><span>7</span></div>
+          <div class="dot" data-step="8"><span>8</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODAL 1: Tarjeta de Resultado de Giro -->
+    <div id="resultModal" class="modal-overlay">
+      <div class="modal-card">
+        <div class="card-badge" id="modalGiroBadge">🎲 GIRO 01</div>
+        <div class="card-collection" id="modalCollection">👑 EL FAVORITO</div>
+        <h2 class="card-title" id="modalFlavorTitle">Chocolate Fudge Brownie</h2>
+        <p class="card-desc" id="modalFlavorDesc">"El rey del chocolate. Difícil empezar mejor."</p>
+        
+        <div class="random-quote-box">
+          <p id="modalRandomQuote">✨ Hoy la suerte estuvo de tu lado.</p>
+        </div>
+
+        <div class="modal-actions">
+          <button id="spinAgainBtn" class="btn-primary">🔄 Volver a girar</button>
+          <div class="action-row">
+            <button id="shareBtn" class="btn-secondary">📲 Compartir</button>
+            <button id="whatsappBtn" class="btn-whatsapp">💬 WhatsApp</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL 2: Pantalla Final de Colección Completa -->
+    <div id="finalModal" class="modal-overlay">
+      <div class="modal-card final-card">
+        <div class="celebration-emoji">🎉</div>
+        <h2 class="final-title">Era inevitable...</h2>
+        <p class="final-desc">Terminaste descubriendo los 8 sabores.</p>
+        <p class="final-highlight">Ahora ya sabes por qué son<br><strong>"Hechos para repetir."</strong></p>
+        
+        <div class="final-box">
+          <p>Colección completa. Ya conoces toda La Ruleta. Ahora solo queda volver a empezar... porque en DameOtro siempre hay una excusa para repetir.</p>
+        </div>
+
+        <button id="resetAllBtn" class="btn-primary gold-glow">VOLVER A EMPEZAR</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
