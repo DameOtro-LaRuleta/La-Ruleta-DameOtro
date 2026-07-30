@@ -1,20 +1,25 @@
-/* Bloquear modo oscuro en móviles y laptops */
+/* 1. Desactivar modo oscuro estándar */
 :root {
-  color-scheme: light;
+  color-scheme: light !important;
+  supported-color-schemes: light !important;
 }
 
+/* 2. Forzar el color de fondo y anular filtros de Samsung Internet */
 html, body {
-  background-color: #fce4ec !important;
+  background-color: #fce4ec !important; /* Tu tono rosado */
   color: #3d1417 !important;
+  
+  /* Filtro específico que neutraliza la inversión forzada de Samsung */
+  -webkit-filter: none !important;
+  filter: none !important;
 }
 
+/* 3. Regla especial para anular la acomodación automática de oscuridad */
 @media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: light;
-  }
   html, body {
     background-color: #fce4ec !important;
     color: #3d1417 !important;
+    filter: none !important;
   }
 }
 /* ==========================================================================
