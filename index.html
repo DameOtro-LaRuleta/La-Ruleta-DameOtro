@@ -2,106 +2,122 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LA RULETA - DameOtro</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>LA RULETA – DameOtro</title>
+
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="Descubre los 8 sabores exclusivos de DameOtro con La Ruleta interactiva. Hechos para repetir.">
+  <meta property="og:title" content="LA RULETA – DameOtro">
+  <meta property="og:description" content="¿Listo para descubrir cuál será tu próximo bocado?">
+  <meta property="og:type" content="website">
+
+  <!-- Fuentes Tipográficas -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@400;600;700;800&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Confetti JS para la celebración -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
 </head>
 <body>
 
-  <div class="main-container">
-    <header class="header">
-      <h1 class="title">LA RULETA</h1>
-      <div class="subtitle-container">
-        <span class="line"></span>
-        <p class="subtitle">8 SABORES PARA REPETIR</p>
-        <span class="line"></span>
+  <!-- Contenedor Principal App -->
+  <div class="app-wrapper">
+
+    <!-- Header / Branding -->
+    <header class="app-header">
+      <div class="logo-container">
+        <h1 class="logo-text">DameOtro<span class="bite-mark"></span></h1>
+        <div class="gold-line"></div>
+        <p class="tagline">Hechos para repetir</p>
       </div>
     </header>
 
-    <div class="roulette-wrapper">
-      <!-- Etiquetas laterales con los nombres de postres -->
-      <div class="labels-container left-labels">
-        <div class="flavor-label label-07">
-          <span class="script-title">Red Velvet Royale</span>
-          <span class="script-sub">Cheesecake</span>
-        </div>
-        <div class="flavor-label label-06">
-          <span class="script-title">Lemon</span>
-          <span class="script-sub">Cream Pie</span>
-        </div>
-        <div class="flavor-label label-05">
-          <span class="script-title">Brookie</span>
-          <span class="script-sub">Supreme</span>
-        </div>
+    <!-- PANTALLA 1: Bienvenida -->
+    <section id="welcomeScreen" class="screen active">
+      <div class="welcome-card">
+        <div class="dice-icon">🎲</div>
+        <h2 class="main-title">LA RULETA</h2>
+        <p class="subtitle-badge">8 SABORES PARA REPETIR</p>
+        <p class="welcome-desc">¿Listo para descubrir cuál será tu primer bocado?</p>
+        <button id="startBtn" class="btn-primary">GIRAR</button>
       </div>
+    </section>
 
-      <!-- Contenedor central de Ruleta -->
-      <div class="wheel-box">
-        <!-- Flecha Dorada Superior/Indicador -->
-        <div class="gold-pointer">▲</div>
-        
+    <!-- PANTALLA 2: Juego / Ruleta -->
+    <section id="gameScreen" class="screen">
+      <div class="wheel-container">
+        <!-- Indicador/Flecha Fija (Apuntando hacia abajo) -->
+        <div class="wheel-pointer">
+          <div class="pointer-arrow"></div>
+        </div>
+
+        <!-- Ruleta Rota -->
         <div class="wheel-frame">
           <canvas id="wheelCanvas" width="500" height="500"></canvas>
-          <button id="spinBtn" class="spin-center-btn">
+          <button id="centerSpinBtn" class="gold-center-btn">
             <span>GIRAR</span>
           </button>
         </div>
       </div>
 
-      <div class="labels-container right-labels">
-        <div class="flavor-label label-08">
-          <span class="script-title">Chocolate Fudge</span>
-          <span class="script-sub">Brownie</span>
+      <!-- Barra de Progreso / Colección de Giros -->
+      <div class="collection-tracker">
+        <h3 class="tracker-title">Colección de Sabores</h3>
+        <div class="tracker-dots" id="trackerDots">
+          <div class="dot" data-step="1"><span>1</span></div>
+          <div class="dot" data-step="2"><span>2</span></div>
+          <div class="dot" data-step="3"><span>3</span></div>
+          <div class="dot" data-step="4"><span>4</span></div>
+          <div class="dot" data-step="5"><span>5</span></div>
+          <div class="dot" data-step="6"><span>6</span></div>
+          <div class="dot" data-step="7"><span>7</span></div>
+          <div class="dot" data-step="8"><span>8</span></div>
         </div>
-        <div class="flavor-label label-01">
-          <span class="script-title">Carrot Cake</span>
-          <span class="script-sub">Atelier</span>
+      </div>
+    </section>
+
+    <!-- MODAL 1: Tarjeta de Resultado de Giro -->
+    <div id="resultModal" class="modal-overlay">
+      <div class="modal-card">
+        <div class="card-badge" id="modalGiroBadge">🎲 GIRO 01</div>
+        <div class="card-collection" id="modalCollection">👑 EL FAVORITO</div>
+        <h2 class="card-title" id="modalFlavorTitle">Chocolate Fudge Brownie</h2>
+        <p class="card-desc" id="modalFlavorDesc">"El rey del chocolate. Difícil empezar mejor."</p>
+        
+        <div class="random-quote-box">
+          <p id="modalRandomQuote">✨ Hoy la suerte estuvo de tu lado.</p>
         </div>
-        <div class="flavor-label label-02">
-          <span class="script-title">Brownie Cheesecake</span>
-          <span class="script-sub">Fusion</span>
-        </div>
-        <div class="flavor-label label-03">
-          <span class="script-title">Apple Crumble</span>
-          <span class="script-sub">Delight</span>
+
+        <div class="modal-actions">
+          <button id="spinAgainBtn" class="btn-primary">🔄 Volver a girar</button>
+          <div class="action-row">
+            <button id="shareBtn" class="btn-secondary">📲 Compartir</button>
+            <button id="whatsappBtn" class="btn-whatsapp">💬 WhatsApp</button>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Etiqueta inferior central -->
-    <div class="flavor-label label-04 bottom-label">
-      <span class="script-title">Classic New York</span>
-      <span class="script-sub">Cheesecake</span>
-    </div>
+    <!-- MODAL 2: Pantalla Final de Colección Completa -->
+    <div id="finalModal" class="modal-overlay">
+      <div class="modal-card final-card">
+        <div class="celebration-emoji">🎉</div>
+        <h2 class="final-title">Era inevitable...</h2>
+        <p class="final-desc">Terminaste descubriendo los 8 sabores.</p>
+        <p class="final-highlight">Ahora ya sabes por qué son<br><strong>"Hechos para repetir."</strong></p>
+        
+        <div class="final-box">
+          <p>Colección completa. Ya conoces toda La Ruleta. Ahora solo queda volver a empezar... porque en DameOtro siempre hay una excusa para repetir.</p>
+        </div>
 
-    <!-- Colección de botones -->
-    <footer class="footer">
-      <p class="collection-title">COLECCIÓN DE SABORES</p>
-      <div class="flavor-badges" id="flavorBadges">
-        <div class="badge" data-index="0">1</div>
-        <div class="badge" data-index="1">2</div>
-        <div class="badge" data-index="2">3</div>
-        <div class="badge" data-index="3">4</div>
-        <div class="badge" data-index="4">5</div>
-        <div class="badge" data-index="5">6</div>
-        <div class="badge" data-index="6">7</div>
-        <div class="badge" data-index="7">8</div>
+        <button id="resetAllBtn" class="btn-primary gold-glow">VOLVER A EMPEZAR</button>
       </div>
-    </footer>
-  </div>
-
-  <!-- Modal de Ganador / Resultado -->
-  <div id="resultModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" id="closeModal">&times;</span>
-      <h2 id="modalTitle">¡TU SABOR ES!</h2>
-      <div id="modalFlavor" class="modal-flavor-name"></div>
-      <p id="modalDesc" class="modal-desc"></p>
-      <button id="claimBtn" class="claim-btn">¡RECLAMAR PROMO!</button>
     </div>
+
   </div>
 
   <script src="script.js"></script>
