@@ -1,22 +1,23 @@
-/* 1. Desactivar modo oscuro estándar */
+/* Bloquear la inversión de Samsung Internet */
 :root {
   color-scheme: light !important;
-  supported-color-schemes: light !important;
 }
 
-/* 2. Forzar el color de fondo y anular filtros de Samsung Internet */
 html, body {
-  background-color: #fce4ec !important; /* Tu tono rosado */
+  /* Engañamos al navegador usando un degradado rosado imperceptible */
+  background: linear-gradient(0deg, #fce4ec 0%, #fce4ec 100%) !important;
+  background-color: #fce4ec !important;
   color: #3d1417 !important;
   
-  /* Filtro específico que neutraliza la inversión forzada de Samsung */
+  /* Anulamos los filtros de inversión de color */
   -webkit-filter: none !important;
   filter: none !important;
 }
 
-/* 3. Regla especial para anular la acomodación automática de oscuridad */
+/* Fuerza el degradado aunque el celular esté en Modo Noche */
 @media (prefers-color-scheme: dark) {
   html, body {
+    background: linear-gradient(0deg, #fce4ec 0%, #fce4ec 100%) !important;
     background-color: #fce4ec !important;
     color: #3d1417 !important;
     filter: none !important;
