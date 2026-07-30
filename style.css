@@ -1,3 +1,22 @@
+/* Bloquear modo oscuro en móviles y laptops */
+:root {
+  color-scheme: light;
+}
+
+html, body {
+  background-color: #fce4ec !important;
+  color: #3d1417 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light;
+  }
+  html, body {
+    background-color: #fce4ec !important;
+    color: #3d1417 !important;
+  }
+}
 /* ==========================================================================
    PALETA Y VARIABLES GLOBALES (Identidad DameOtro)
    ========================================================================== */
