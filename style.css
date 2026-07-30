@@ -1,28 +1,29 @@
-/* Bloquear la inversión de Samsung Internet */
+/* ==========================================================================
+   0. ANTI MODO OSCURO (Compatibilidad total Samsung Internet / Android)
+   ========================================================================== */
 :root {
   color-scheme: light !important;
+  supported-color-schemes: light !important;
 }
 
 html, body {
-  /* Engañamos al navegador usando un degradado rosado imperceptible */
-  background: linear-gradient(0deg, #fce4ec 0%, #fce4ec 100%) !important;
-  background-color: #fce4ec !important;
-  color: #3d1417 !important;
-  
-  /* Anulamos los filtros de inversión de color */
+  /* Usamos un degradado lineal imperceptible para evitar que Samsung Internet invierta los tonos */
+  background: linear-gradient(0deg, #F4C2D0 0%, #F4C2D0 100%) !important;
+  background-color: #F4C2D0 !important;
+  color: #3E1E19 !important;
   -webkit-filter: none !important;
   filter: none !important;
 }
 
-/* Fuerza el degradado aunque el celular esté en Modo Noche */
 @media (prefers-color-scheme: dark) {
   html, body {
-    background: linear-gradient(0deg, #fce4ec 0%, #fce4ec 100%) !important;
-    background-color: #fce4ec !important;
-    color: #3d1417 !important;
+    background: linear-gradient(0deg, #F4C2D0 0%, #F4C2D0 100%) !important;
+    background-color: #F4C2D0 !important;
+    color: #3E1E19 !important;
     filter: none !important;
   }
 }
+
 /* ==========================================================================
    PALETA Y VARIABLES GLOBALES (Identidad DameOtro)
    ========================================================================== */
@@ -54,9 +55,7 @@ html, body {
 }
 
 body {
-  background-color: var(--bg-pink);
   font-family: 'Montserrat', sans-serif;
-  color: var(--chocolate-dark);
   min-height: 100vh;
   display: flex;
   justify-content: center;
